@@ -1,2365 +1,1205 @@
 /* ==========================================================================
-   منشئ السيرة الذاتية الاحترافي (CV Builder Pro) - أنماط التصميم المتطورة
+   Design System & Professional Theme Variables
    ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. المتغيرات العامة وأنظمة الألوان (CSS Variables & Design Tokens)
-   -------------------------------------------------------------------------- */
 :root {
-  /* ألوان واجهة التطبيق */
-  --bg-page: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-surface-alt: #f1f5f9;
-  --bg-subtle: #e2e8f0;
-  
-  --text-main: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --text-light: #94a3b8;
-  
-  --border-light: #e2e8f0;
-  --border-medium: #cbd5e1;
-  --border-focus: #2563eb;
-  
-  --color-primary-app: #2563eb;
-  --color-primary-app-hover: #1d4ed8;
-  --color-success: #10b981;
-  --color-danger: #ef4444;
-  --color-danger-hover: #dc2626;
-  --color-warning: #f59e0b;
-  
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.07);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-paper: 0 20px 40px -10px rgba(15, 23, 42, 0.2), 0 8px 16px -4px rgba(0, 0, 0, 0.08);
-  
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
-  
-  --transition-fast: 0.15s ease;
-  --transition-base: 0.25s ease;
-  
-  /* متغيرات السيرة الذاتية الديناميكية القابلة للتخصيص */
-  --cv-primary: #1e3a8a;
-  --cv-secondary: #0284c7;
-  --cv-text: #1e293b;
-  --cv-text-muted: #64748b;
-  --cv-bg: #ffffff;
-  --cv-font-family: 'Cairo', sans-serif;
-  --cv-font-size-base: 13.5px;
-  --cv-line-height: 1.55;
-  --cv-section-gap: 1.25rem;
-  --cv-item-gap: 0.85rem;
+  /* Dynamic Primary Color (customizable by user) */
+  --primary: #1e3a8a;
+  --primary-hover: #1e40af;
+  --primary-soft: rgba(30, 58, 138, 0.08);
+  --primary-border: rgba(30, 58, 138, 0.2);
+
+  /* Modern Neutral Palette */
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50:  #f8fafc;
+  --white:     #ffffff;
+
+  /* Semantic Accents */
+  --danger:       #ef4444;
+  --danger-soft:  #fef2f2;
+  --danger-border:#fca5a5;
+  --success:      #10b981;
+  --amber:        #f59e0b;
+
+  /* Typography */
+  --font-ar: 'Cairo', system-ui, -apple-system, sans-serif;
+  --font-en: 'Inter', system-ui, -apple-system, sans-serif;
+  --cv-font: 'Cairo', system-ui, sans-serif;
+
+  /* Radii & Shadows */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 9999px;
+
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card:   0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-hover:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-sheet:  0 25px 50px -12px rgba(0, 0, 0, 0.45);
 }
 
-/* --------------------------------------------------------------------------
-   2. إعادة الضبط والأساسيات ودعم RTL/LTR (Reset & Bidirectional Base)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   CSS Reset & Base
+   ========================================================================== */
 *, *::before, *::after {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  text-size-adjust: 100%;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background-color: var(--bg-page);
-  color: var(--text-main);
-  line-height: 1.5;
+  font-family: var(--font-ar);
+  background-color: var(--slate-100);
+  color: var(--slate-800);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* اتجاه الصفحة العربي والشرقي */
-body.dir-rtl {
-  direction: rtl;
-  text-align: right;
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--slate-300);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-400);
 }
 
-/* اتجاه الصفحة اللاتيني والغربي */
-body.dir-ltr {
-  direction: ltr;
-  text-align: left;
-}
-
-.text-ltr {
-  direction: ltr !important;
-  text-align: left !important;
-}
-
-.text-rtl {
-  direction: rtl !important;
-  text-align: right !important;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-button, input, select, textarea {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-}
-
-/* --------------------------------------------------------------------------
-   3. الأزرار والمكونات العامة (Buttons & Form Controls)
-   -------------------------------------------------------------------------- */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.25rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  white-space: nowrap;
-  line-height: 1;
-}
-
-.btn-sm {
-  padding: 0.45rem 0.85rem;
-  font-size: 0.85rem;
-  border-radius: var(--radius-sm);
-}
-
-.btn-lg {
-  padding: 0.85rem 1.75rem;
-  font-size: 1.05rem;
-  border-radius: var(--radius-lg);
-}
-
-.btn-block {
-  width: 100%;
-}
-
-.btn-primary {
-  background-color: var(--color-primary-app);
-  color: #ffffff;
-  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-}
-
-.btn-primary:hover {
-  background-color: var(--color-primary-app-hover);
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  background-color: var(--bg-surface-alt);
-  color: var(--text-secondary);
-  border-color: var(--border-medium);
-}
-
-.btn-secondary:hover {
-  background-color: var(--bg-subtle);
-  color: var(--text-main);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--color-primary-app);
-  border-color: var(--color-primary-app);
-}
-
-.btn-outline:hover {
-  background-color: #eff6ff;
-}
-
-.btn-ghost {
-  background-color: transparent;
-  border-color: transparent;
-  color: var(--text-secondary);
-}
-
-.btn-ghost:hover {
-  background-color: var(--bg-surface-alt);
-}
-
-.btn-danger {
-  background-color: var(--color-danger);
-  color: #ffffff;
-}
-
-.btn-danger:hover {
-  background-color: var(--color-danger-hover);
-}
-
-.text-danger {
-  color: var(--color-danger) !important;
-}
-
-.mt-3 { margin-top: 0.75rem; }
-.mt-4 { margin-top: 1.25rem; }
-.mb-4 { margin-bottom: 1.25rem; }
-.font-bold { font-weight: 700; }
-
-/* --------------------------------------------------------------------------
-   4. رأس الموقع وقائمة اللغات (Header & Language Switcher)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   App Header (Glassmorphic & Sleek)
+   ========================================================================== */
 .app-header {
-  background-color: var(--bg-surface);
-  border-bottom: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--slate-200);
+  padding: 0.7rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: sticky;
   top: 0;
-  z-index: 100;
-  box-shadow: var(--shadow-sm);
+  z-index: 50;
+  box-shadow: var(--shadow-subtle);
 }
 
-.header-container {
-  max-width: 1680px;
-  margin: 0 auto;
-  padding: 0.75rem 1.5rem;
+.header-brand {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.header-brand .brand-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .brand-logo {
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-}
-
-.brand-text {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--primary), var(--slate-800));
+  color: var(--white);
+  border-radius: var(--radius-sm);
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(30, 58, 138, 0.25);
 }
 
-.brand-title {
+.brand-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.brand-info h1 {
+  font-size: 1.15rem;
   font-weight: 800;
-  font-size: 1.2rem;
-  color: var(--text-main);
-  letter-spacing: -0.5px;
+  color: var(--slate-900);
+  line-height: 1;
 }
 
 .brand-badge {
+  background: var(--slate-100);
+  color: var(--primary);
   font-size: 0.72rem;
-  color: var(--color-success);
   font-weight: 700;
-}
-
-.header-nav .nav-list {
-  display: flex;
-  list-style: none;
-  gap: 0.5rem;
-}
-
-.nav-link {
-  padding: 0.5rem 0.85rem;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
-}
-
-.nav-link:hover, .nav-link.active {
-  color: var(--color-primary-app);
-  background-color: var(--bg-surface-alt);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--slate-200);
+  letter-spacing: 0.5px;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-}
-
-/* قائمة اختيار لغة الموقع (UI Language Dropdown) */
-.language-dropdown-wrapper {
-  position: relative;
-}
-
-.lang-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.75rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.lang-arrow {
-  font-size: 0.65rem;
-  transition: transform var(--transition-fast);
-}
-
-.language-dropdown-wrapper.open .lang-arrow {
-  transform: rotate(180deg);
-}
-
-.language-dropdown-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 6px);
-  inset-inline-end: 0;
-  width: 210px;
-  max-height: 380px;
-  overflow-y: auto;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  padding: 0.4rem 0;
-  z-index: 1000;
-}
-
-.language-dropdown-wrapper.open .language-dropdown-menu {
-  display: block;
-  animation: dropIn 0.18s ease-out;
-}
-
-@keyframes dropIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.lang-item-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.55rem 1rem;
-  background: transparent;
-  border: none;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  cursor: pointer;
-  text-align: inherit;
-  transition: background-color var(--transition-fast);
-}
-
-.lang-item-btn:hover {
-  background-color: var(--bg-surface-alt);
-  color: var(--color-primary-app);
-}
-
-.lang-item-btn.active {
-  background-color: #eff6ff;
-  color: var(--color-primary-app);
-  font-weight: 800;
-}
-
-/* --------------------------------------------------------------------------
-   5. القسم الترويجي (Hero Section)
-   -------------------------------------------------------------------------- */
-.hero-section {
-  background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 50%, #f1f5f9 100%);
-  border-bottom: 1px solid var(--border-light);
-  padding: 2.75rem 1.5rem 2.25rem;
-  text-align: center;
-}
-
-.hero-container {
-  max-width: 950px;
-  margin: 0 auto;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 1rem;
-  background-color: #dbeafe;
-  color: #1e40af;
-  border-radius: var(--radius-full);
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 1.25rem;
-}
-
-.badge-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--color-primary-app);
-  border-radius: 50%;
-  display: inline-block;
-  animation: pulse-dot 2s infinite;
-}
-
-@keyframes pulse-dot {
-  0% { transform: scale(0.95); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0.8; }
-}
-
-.hero-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--text-main);
-  line-height: 1.25;
-  margin-bottom: 1rem;
-}
-
-.hero-subtitle {
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  max-width: 780px;
-  margin: 0 auto 2rem;
-  line-height: 1.7;
-}
-
-.hero-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.hero-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.hero-feature-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 0.6rem;
-  padding: 0.85rem 1rem;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-secondary);
 }
 
-.feature-icon {
-  font-size: 1.2rem;
+.header-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--slate-200);
+  margin: 0 0.2rem;
 }
 
-/* --------------------------------------------------------------------------
-   6. شريط التبديل للأجهزة الصغيرة (Mobile Tabs Bar)
-   -------------------------------------------------------------------------- */
-.mobile-tabs-bar {
-  display: none;
-  position: sticky;
-  top: 57px;
-  z-index: 95;
-  background-color: var(--bg-surface);
-  border-bottom: 2px solid var(--border-light);
-  padding: 0.5rem 1rem;
-  gap: 0.5rem;
-}
-
-.mobile-tab-btn {
-  flex: 1;
+/* App Language Switcher */
+.lang-selector-wrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.65rem 0.5rem;
-  border-radius: var(--radius-md);
-  border: none;
-  background-color: var(--bg-surface-alt);
-  color: var(--text-secondary);
-  font-weight: 700;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.mobile-tab-btn.active {
-  background-color: var(--color-primary-app);
-  color: #ffffff;
-}
-
-/* --------------------------------------------------------------------------
-   7. حاوية منطقة العمل الرئيسية (Builder Container Grid)
-   -------------------------------------------------------------------------- */
-.builder-container {
-  max-width: 1720px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 1.5rem;
-  display: grid;
-  grid-template-columns: minmax(460px, 580px) minmax(500px, 1fr);
-  gap: 1.75rem;
-  align-items: start;
-  flex: 1;
-}
-
-/* --------------------------------------------------------------------------
-   8. محرر البيانات ونظام الأكورديون (Editor Panel)
-   -------------------------------------------------------------------------- */
-.editor-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.editor-header-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 0.75rem 1rem;
-  box-shadow: var(--shadow-sm);
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.save-status {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.82rem;
-  color: var(--color-success);
-  font-weight: 600;
-}
-
-.status-indicator {
-  width: 8px;
-  height: 8px;
-  background-color: var(--color-success);
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.editor-quick-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-icon-action {
-  display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.4rem 0.7rem;
-  font-size: 0.82rem;
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.lang-selector-wrap:hover {
+  border-color: var(--slate-300);
+}
+
+.nav-select {
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--slate-700);
+  outline: none;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Buttons & Interactive Elements
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.86rem;
+  font-family: inherit;
   font-weight: 600;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-medium);
-  background-color: var(--bg-surface-alt);
-  color: var(--text-secondary);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  user-select: none;
 }
 
-.btn-icon-action:hover {
-  background-color: var(--bg-subtle);
-  color: var(--text-main);
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
 }
 
-.btn-danger-action {
-  border-color: #fecaca;
-  color: var(--color-danger);
-  background-color: #fef2f2;
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+  transform: translateY(-1px);
 }
 
-.btn-danger-action:hover {
-  background-color: #fee2e2;
-  color: var(--color-danger-hover);
+.btn-primary:active {
+  transform: translateY(0);
 }
 
-/* الأكورديون */
-.accordion-item {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+.btn-secondary {
+  background: var(--white);
+  border-color: var(--slate-200);
+  color: var(--slate-700);
+}
+
+.btn-secondary:hover {
+  background: var(--slate-50);
+  border-color: var(--slate-300);
+  color: var(--slate-900);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--slate-600);
+  border: none;
+}
+
+.btn-ghost:hover {
+  background: var(--slate-100);
+  color: var(--slate-900);
+}
+
+.btn-sm {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  border-radius: var(--radius-xs);
+}
+
+.text-danger {
+  color: var(--danger) !important;
+}
+
+.text-danger:hover {
+  background: var(--danger-soft) !important;
+}
+
+.btn-file {
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Layout Architecture
+   ========================================================================== */
+.app-layout {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  height: calc(100vh - 63px);
   overflow: hidden;
-  transition: border-color var(--transition-fast);
 }
 
-.accordion-item:focus-within {
-  border-color: var(--border-focus);
+/* ==========================================================================
+   Left Panel: Editor & Forms
+   ========================================================================== */
+.editor-panel {
+  background: var(--slate-50);
+  border-left: 1px solid var(--slate-200);
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-.accordion-header {
-  width: 100%;
+/* Studio Card */
+.studio-card {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.studio-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--slate-300);
+}
+
+.card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
-  background-color: var(--bg-surface);
-  border: none;
-  cursor: pointer;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.card-head h2 {
+  font-size: 0.98rem;
   font-weight: 700;
-  font-size: 1rem;
-  color: var(--text-main);
-  transition: background-color var(--transition-fast);
-}
-
-.accordion-header:hover {
-  background-color: var(--bg-surface-alt);
-}
-
-.acc-title {
+  color: var(--slate-900);
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.5rem;
 }
 
-.acc-icon {
-  font-size: 1.2rem;
+.card-head .icon {
+  font-size: 1.15rem;
 }
 
-.item-count-badge {
-  background-color: var(--bg-subtle);
-  color: var(--text-secondary);
-  padding: 0.15rem 0.55rem;
-  font-size: 0.75rem;
-  border-radius: var(--radius-full);
-  font-weight: 700;
-}
-
-.chevron-icon {
-  color: var(--text-muted);
-  transition: transform var(--transition-base);
-}
-
-.accordion-item.expanded .chevron-icon {
-  transform: rotate(180deg);
-}
-
-.accordion-content {
-  display: none;
-  padding: 1.25rem;
-  border-top: 1px solid var(--border-light);
-  background-color: #ffffff;
-}
-
-.accordion-item.expanded .accordion-content {
-  display: block;
-  animation: slideDown 0.2s ease-out;
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* حقول النماذج */
-.form-row-2 {
+/* Theme Toolbar Grid */
+.theme-settings-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.85rem;
-  margin-bottom: 0.85rem;
+  gap: 0.9rem;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.setting-item label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--slate-600);
+}
+
+/* Color Palette Bar */
+.color-palette-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  padding-top: 0.15rem;
+}
+
+.color-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 1px var(--slate-300);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.color-dot:hover {
+  transform: scale(1.2);
+}
+
+.color-dot.active {
+  box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary);
+  transform: scale(1.15);
+}
+
+.custom-color-wrap {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  border: 1px solid var(--slate-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#customColorPicker {
+  width: 36px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  margin: -5px;
+}
+
+/* Form Layout */
+.form-sections-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.95rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  margin-bottom: 0.85rem;
 }
 
-.form-group:last-child {
-  margin-bottom: 0;
+.form-group.full-width {
+  grid-column: 1 / -1;
 }
 
-.form-label {
-  font-size: 0.85rem;
+.form-group label {
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--slate-700);
 }
 
-.form-label.required::after {
-  content: " *";
-  color: var(--color-danger);
-  font-weight: 800;
+.required {
+  color: var(--danger);
 }
 
-.form-input, .form-select, .form-textarea {
+.form-input {
   width: 100%;
-  padding: 0.65rem 0.85rem;
-  background-color: #ffffff;
-  border: 1px solid var(--border-medium);
+  padding: 0.58rem 0.8rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  border: 1px solid var(--slate-200);
   border-radius: var(--radius-sm);
-  color: var(--text-main);
-  font-size: 0.9rem;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.form-input:focus, .form-select:focus, .form-textarea:focus {
+  background-color: var(--white);
+  color: var(--slate-800);
   outline: none;
-  border-color: var(--color-primary-app);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  transition: all 0.2s;
 }
 
-.form-input.is-invalid {
-  border-color: var(--color-danger);
-  background-color: #fef2f2;
+.form-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
-.field-error-msg {
-  display: none;
-  color: var(--color-danger);
-  font-size: 0.76rem;
-  font-weight: 600;
-  margin-top: 0.15rem;
+.form-input::placeholder {
+  color: var(--slate-400);
+  font-size: 0.82rem;
 }
 
-.field-error-msg.visible {
-  display: block;
+.custom-select {
+  cursor: pointer;
+  background-color: var(--white);
 }
 
-.form-textarea {
+textarea.form-input {
   resize: vertical;
-  min-height: 80px;
+  min-height: 75px;
+  line-height: 1.5;
 }
 
-/* صندوق لغة السيرة الذاتية */
-.cv-lang-box {
-  background-color: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: var(--radius-md);
-  padding: 0.85rem 1rem;
-}
-
-.cv-lang-flex {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.cv-lang-hint {
-  font-size: 0.78rem;
-  color: #1e40af;
-  font-weight: 600;
-}
-
-/* رفع الصورة */
-.photo-upload-container {
+/* Photo Uploader Box */
+.photo-uploader-box {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding: 1rem;
-  background-color: var(--bg-surface-alt);
-  border-radius: var(--radius-md);
-  margin-bottom: 1.25rem;
-  border: 1px dashed var(--border-medium);
+  gap: 1.2rem;
+  background: var(--slate-50);
+  border: 1px dashed var(--slate-300);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
 }
 
-.photo-preview-box {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+.photo-preview-wrap {
+  width: 62px;
+  height: 62px;
+  border-radius: var(--radius-pill);
   overflow: hidden;
-  border: 2px solid var(--color-primary-app);
-  background-color: #ffffff;
-  flex-shrink: 0;
+  position: relative;
+  background: var(--slate-200);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid var(--white);
+  box-shadow: var(--shadow-subtle);
+  flex-shrink: 0;
 }
 
-.photo-preview-box img {
+.photo-preview-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.photo-actions {
+.img-placeholder {
+  color: var(--slate-400);
+}
+
+.photo-controls {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
   align-items: flex-start;
 }
 
 .photo-tip {
-  font-size: 0.74rem;
-  color: var(--text-muted);
+  font-size: 0.73rem;
+  color: var(--slate-400);
 }
 
-/* --------------------------------------------------------------------------
-   9. بطاقات الـ 15 قالباً وتصفيتها (15 Templates Grid & Filters)
-   -------------------------------------------------------------------------- */
-.template-filter-tags {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.85rem;
-}
-
-.t-filter-btn {
-  background-color: var(--bg-surface-alt);
-  border: 1px solid var(--border-medium);
-  padding: 0.3rem 0.65rem;
-  border-radius: var(--radius-full);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.t-filter-btn:hover {
-  background-color: var(--bg-subtle);
-  color: var(--text-main);
-}
-
-.t-filter-btn.active {
-  background-color: var(--color-primary-app);
-  border-color: var(--color-primary-app);
-  color: #ffffff;
-}
-
-.template-cards-grid-15 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 0.65rem;
-  max-height: 420px;
-  overflow-y: auto;
-  padding: 4px;
-}
-
-.template-card-option {
-  cursor: pointer;
-}
-
-.template-card-option input[type="radio"] {
-  display: none;
-}
-
-.template-card-box {
-  border: 2px solid var(--border-medium);
-  border-radius: var(--radius-md);
-  padding: 0.5rem;
-  text-align: center;
-  transition: all var(--transition-fast);
-  background-color: var(--bg-surface);
-  position: relative;
-  height: 100%;
+/* Dynamic Item Cards */
+.dynamic-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 0.9rem;
 }
 
-.template-card-option input[type="radio"]:checked + .template-card-box {
-  border-color: var(--color-primary-app);
-  background-color: #eff6ff;
-  box-shadow: 0 0 0 1.5px var(--color-primary-app);
-}
-
-.template-badge {
-  position: absolute;
-  top: 4px;
-  inset-inline-start: 4px;
-  background-color: var(--bg-subtle);
-  color: var(--text-secondary);
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 1px 5px;
-  border-radius: 4px;
-}
-
-.template-card-option input[type="radio"]:checked + .template-card-box .template-badge {
-  background-color: var(--color-primary-app);
-  color: #ffffff;
-}
-
-.template-preview-mini {
-  width: 100%;
-  height: 64px;
-  background-color: #ffffff;
-  border: 1px solid var(--border-light);
+.item-card {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
   border-radius: var(--radius-sm);
-  margin-bottom: 0.4rem;
-  overflow: hidden;
-  padding: 3px;
+  padding: 0.95rem;
+  transition: border-color 0.2s;
 }
 
-.template-name {
-  font-weight: 700;
-  font-size: 0.78rem;
-  color: var(--text-main);
-  margin-bottom: 0.1rem;
+.item-card:hover {
+  border-color: var(--slate-300);
 }
 
-.template-tag {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-}
-
-/* --------------------------------------------------------------------------
-   10. ألوان السيرة المتقدمة وتخصيص العناصر (Advanced Color Engine)
-   -------------------------------------------------------------------------- */
-.color-palette-wrapper {
-  margin-bottom: 0.75rem;
-}
-
-.color-presets {
+.item-card-header {
   display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.color-circle {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: transform var(--transition-fast);
-}
-
-.color-circle:hover {
-  transform: scale(1.15);
-}
-
-.color-circle.active {
-  border-color: #ffffff;
-  box-shadow: 0 0 0 2px var(--color-primary-app);
-  transform: scale(1.1);
-}
-
-.advanced-color-pickers {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-  background-color: var(--bg-surface-alt);
-  padding: 0.75rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-light);
-}
-
-.color-input-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.sub-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.color-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  background-color: #ffffff;
-  padding: 2px 6px;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-sm);
-}
-
-.color-input-wrap input[type="color"] {
-  border: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-  background: transparent;
-}
-
-.color-input-wrap span {
-  font-size: 0.72rem;
-  font-family: monospace;
-  color: var(--text-muted);
-}
-
-/* ترتيب الأقسام (Section Reordering) */
-.section-order-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin-top: 0.4rem;
-}
-
-.order-hint {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  margin-bottom: 0.35rem;
-}
-
-.section-order-item {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0.45rem 0.75rem;
-  background-color: var(--bg-surface-alt);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.order-arrows {
-  display: flex;
   align-items: center;
-  gap: 0.25rem;
-}
-
-.btn-order-arrow {
-  background: transparent;
-  border: 1px solid var(--border-medium);
-  border-radius: 3px;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
-}
-
-.btn-order-arrow:hover:not(:disabled) {
-  background-color: var(--color-primary-app);
-  color: #ffffff;
-  border-color: var(--color-primary-app);
-}
-
-.btn-order-arrow:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* مفاتيح إظهار وإخفاء الأقسام (Visibility Switches) */
-.section-visibility-wrapper {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-light);
-}
-
-.toggles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 0.55rem;
-}
-
-.switch-control {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  cursor: pointer;
-  user-select: none;
-}
-
-.switch-control input[type="checkbox"] {
-  display: none;
-}
-
-.switch-slider {
-  width: 34px;
-  height: 18px;
-  background-color: var(--border-medium);
-  border-radius: var(--radius-full);
-  position: relative;
-  transition: background-color var(--transition-fast);
-  flex-shrink: 0;
-}
-
-.switch-slider::before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  inset-inline-start: 2px;
-  width: 14px;
-  height: 14px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  transition: transform var(--transition-fast);
-}
-
-.switch-control input[type="checkbox"]:checked + .switch-slider {
-  background-color: var(--color-primary-app);
-}
-
-body.dir-rtl .switch-control input[type="checkbox"]:checked + .switch-slider::before {
-  transform: translateX(-16px);
-}
-
-body.dir-ltr .switch-control input[type="checkbox"]:checked + .switch-slider::before {
-  transform: translateX(16px);
-}
-
-.switch-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-/* --------------------------------------------------------------------------
-   11. بطاقات المكررات (Repeaters)
-   -------------------------------------------------------------------------- */
-.repeater-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.repeater-card {
-  background-color: var(--bg-surface-alt);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-md);
-  padding: 0.85rem;
-  position: relative;
-  transition: border-color var(--transition-fast);
-}
-
-.repeater-card:hover {
-  border-color: var(--border-focus);
-}
-
-.repeater-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin-bottom: 0.65rem;
   padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--slate-200);
 }
 
-.repeater-card-title {
-  font-size: 0.88rem;
+.item-badge {
+  font-size: 0.76rem;
   font-weight: 700;
-  color: var(--text-main);
+  color: var(--primary);
+  background: var(--primary-soft);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+.btn-remove-item {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity 0.2s;
+}
+
+.btn-remove-item:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Skills & Languages Row */
+.dynamic-chips-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.skill-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 34px;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-icon-danger {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  color: var(--danger);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.15s;
+}
+
+.btn-icon-danger:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger-border);
+}
+
+/* ==========================================================================
+   Right Panel: Studio Preview Canvas
+   ========================================================================== */
+.preview-panel {
+  background-color: var(--slate-900);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  overflow-y: auto;
+  padding: 1.75rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Floating Glass Toolbar */
+.preview-floating-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  padding: 0.45rem 1.15rem;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.toolbar-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--slate-200);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--success);
+  box-shadow: 0 0 8px var(--success);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.preview-zoom-group {
   display: flex;
   align-items: center;
   gap: 0.4rem;
 }
 
-.repeater-card-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.btn-card-action {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0.25rem;
+.btn-zoom {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
   border-radius: var(--radius-sm);
-  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color var(--transition-fast), background-color var(--transition-fast);
-}
-
-.btn-card-action:hover {
-  background-color: var(--bg-subtle);
-  color: var(--text-main);
-}
-
-.btn-card-action.text-danger:hover {
-  background-color: #fee2e2;
-  color: var(--color-danger) !important;
-}
-
-.compact-repeater-row {
-  display: grid;
-  grid-template-columns: 1fr 140px 32px;
-  gap: 0.5rem;
-  align-items: center;
-  background-color: var(--bg-surface-alt);
-  padding: 0.45rem 0.65rem;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-sm);
-}
-
-/* --------------------------------------------------------------------------
-   12. لوحة المعاينة المباشرة (Live Multi-Page Preview Panel)
-   -------------------------------------------------------------------------- */
-.preview-panel {
-  position: sticky;
-  top: 72px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  max-height: calc(100vh - 86px);
-}
-
-.preview-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 0.6rem 0.9rem;
-  box-shadow: var(--shadow-sm);
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.preview-toolbar-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  font-size: 0.92rem;
-  color: var(--text-main);
-}
-
-.page-count-badge {
-  background-color: #dbeafe;
-  color: #1e40af;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
-}
-
-.preview-controls-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-toggle-guides {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  background-color: var(--bg-surface-alt);
-  border: 1px solid var(--border-medium);
-  padding: 0.25rem 0.55rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-secondary);
   cursor: pointer;
+  transition: all 0.15s;
 }
 
-.btn-toggle-guides.active {
-  background-color: #eff6ff;
-  border-color: var(--color-primary-app);
-  color: var(--color-primary-app);
+.btn-zoom:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
-.preview-zoom-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  background-color: var(--bg-surface-alt);
-  padding: 0.15rem 0.35rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-light);
-}
-
-.zoom-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 3px;
-  transition: background-color var(--transition-fast);
-}
-
-.zoom-btn:hover {
-  background-color: var(--bg-subtle);
-  color: var(--text-main);
-}
-
-.zoom-level-text {
+.zoom-label {
   font-size: 0.78rem;
   font-weight: 700;
-  min-width: 38px;
+  min-width: 44px;
   text-align: center;
-  color: var(--text-main);
+  color: var(--slate-300);
+  font-family: var(--font-en);
 }
 
-.print-tip-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  color: #166534;
-  padding: 0.45rem 0.85rem;
-  border-radius: var(--radius-md);
-  font-size: 0.8rem;
-  font-weight: 600;
+.btn-zoom-reset {
+  width: auto;
+  padding: 0 0.6rem;
+  font-size: 0.75rem;
 }
 
-/* مساحة عرض ورقة الـ CV (A4 Viewport) */
-.cv-viewport-wrapper {
-  background-color: #334155;
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  overflow: auto;
+.preview-canvas-wrapper {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.25);
-  min-height: 550px;
-  flex: 1;
-}
-
-.cv-paper-container {
   transform-origin: top center;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  justify-content: center;
+  transition: transform 0.12s ease-out;
 }
 
-/* --------------------------------------------------------------------------
-   13. ورقة السيرة الذاتية القياسية A4 (The Continuous A4 Document Sheet)
-   -------------------------------------------------------------------------- */
-.cv-document {
+/* ==========================================================================
+   CV Sheet Paper (Exact A4 Dimensions: 210mm x 297mm)
+   ========================================================================== */
+.cv-sheet {
+  background: var(--white);
   width: 210mm;
   min-height: 297mm;
-  background-color: var(--cv-bg, #ffffff);
-  box-shadow: var(--shadow-paper);
-  border-radius: 2px;
-  font-family: var(--cv-font-family);
-  font-size: var(--cv-font-size-base);
-  line-height: var(--cv-line-height);
-  color: var(--cv-text);
-  position: relative;
+  padding: 20mm 18mm;
+  box-shadow: var(--shadow-sheet);
+  color: var(--slate-800);
+  font-family: var(--cv-font);
   box-sizing: border-box;
-  transition: font-size var(--transition-fast);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  word-break: break-word;
+  transition: all 0.2s ease;
 }
 
-/* فواصل صفحات A4 التقديرية أثناء المعاينة */
-.cv-document.show-page-guides {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 296.5mm,
-    rgba(239, 68, 68, 0.4) 296.5mm,
-    rgba(239, 68, 68, 0.4) 297mm
-  );
-}
-
-/* كثافة الخط في السيرة */
-.cv-document.font-size-compact {
-  --cv-font-size-base: 12px;
-  --cv-line-height: 1.45;
-  --cv-section-gap: 0.95rem;
-  --cv-item-gap: 0.65rem;
-}
-
-.cv-document.font-size-normal {
-  --cv-font-size-base: 13.5px;
-  --cv-line-height: 1.55;
-  --cv-section-gap: 1.25rem;
-  --cv-item-gap: 0.85rem;
-}
-
-.cv-document.font-size-large {
-  --cv-font-size-base: 15px;
-  --cv-line-height: 1.65;
-  --cv-section-gap: 1.45rem;
-  --cv-item-gap: 1rem;
-}
-
-/* عناصر السيرة المشتركة */
+/* Base CV Typography & Elements */
 .cv-header {
-  margin-bottom: var(--cv-section-gap);
-  break-inside: avoid;
+  margin-bottom: 1.25rem;
 }
 
-.cv-photo-wrapper {
-  overflow: hidden;
-  flex-shrink: 0;
-  border: 2px solid var(--cv-primary);
-  background-color: #f1f5f9;
-  break-inside: avoid;
+.cv-name {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.15;
+  letter-spacing: -0.3px;
 }
 
-.cv-photo-circle { border-radius: 50%; }
-.cv-photo-rounded { border-radius: var(--radius-md); }
-.cv-photo-square { border-radius: 2px; }
+.cv-job-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--slate-600);
+  margin-top: 0.25rem;
+}
 
-.cv-photo-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.cv-contact-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  font-size: 0.83rem;
+  color: var(--slate-600);
+  margin-top: 0.75rem;
 }
 
 .cv-contact-item {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.88em;
-  color: var(--cv-text);
-  word-break: break-all;
-  break-inside: avoid;
-}
-
-.cv-contact-item svg {
-  flex-shrink: 0;
-  color: var(--cv-primary);
 }
 
 .cv-section {
-  margin-bottom: var(--cv-section-gap);
-  break-inside: auto;
+  margin-bottom: 1.15rem;
 }
 
 .cv-section-title {
-  font-size: 1.15em;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: var(--cv-primary);
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin-bottom: 0.65rem;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  break-after: avoid;
-  page-break-after: avoid;
+  gap: 0.5rem;
 }
 
-.cv-block-item {
-  margin-bottom: var(--cv-item-gap);
-  break-inside: avoid;
-  page-break-inside: avoid;
+.cv-summary-text {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+  text-align: justify;
 }
 
-.cv-block-header {
+/* Entries (Experience, Education, Certs) */
+.cv-entry {
+  margin-bottom: 0.85rem;
+}
+
+.cv-entry-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: 0.25rem;
 }
 
-.cv-item-title {
+.cv-entry-title {
   font-weight: 700;
-  font-size: 1em;
-  color: var(--cv-text);
+  font-size: 0.94rem;
+  color: var(--slate-900);
 }
 
-.cv-item-subtitle {
-  font-weight: 600;
-  font-size: 0.92em;
-  color: var(--cv-text-muted);
-}
-
-.cv-item-date {
-  font-size: 0.82em;
-  color: var(--cv-text-muted);
+.cv-entry-date {
+  font-size: 0.8rem;
+  color: var(--slate-500);
   font-weight: 500;
-  background-color: rgba(0, 0, 0, 0.04);
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  white-space: nowrap;
 }
 
-.cv-item-desc {
-  font-size: 0.9em;
-  color: var(--cv-text);
-  margin-top: 0.25rem;
+.cv-entry-subtitle {
+  font-weight: 600;
+  font-size: 0.86rem;
+  color: var(--primary);
+  margin-top: 0.1rem;
+}
+
+.cv-entry-desc {
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--slate-600);
+  margin-top: 0.3rem;
   white-space: pre-line;
-  line-height: 1.5;
 }
 
-/* أنماط عرض المهارات الستة المختلفة */
+/* Skills Badges */
 .cv-skills-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
 }
 
-/* 1. وسوم Tags */
-.skills-style-tags .cv-skill-tag {
-  background-color: rgba(30, 58, 138, 0.07);
-  border: 1px solid rgba(30, 58, 138, 0.18);
+.cv-skill-badge {
+  background: var(--slate-100);
+  color: var(--slate-800);
   padding: 0.25rem 0.65rem;
-  border-radius: 4px;
-  font-size: 0.85em;
+  border-radius: var(--radius-xs);
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--cv-primary);
-  break-inside: avoid;
+  border: 1px solid var(--slate-200);
 }
 
-/* 2. نقاط Dots */
-.skills-style-dots .cv-skill-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.2rem 0.5rem;
-  background: rgba(0,0,0,0.03);
-  border-radius: 4px;
-  min-width: 140px;
-  gap: 0.5rem;
-  font-size: 0.88em;
-  break-inside: avoid;
-}
-
-.skill-dots { display: inline-flex; gap: 3px; }
-.skill-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #cbd5e1;
-}
-.skill-dot.filled { background-color: var(--cv-primary); }
-
-/* 3. أشرطة تقدم Progress Bars */
-.skills-style-bars .cv-skill-item {
-  width: 100%;
-  margin-bottom: 0.45rem;
-  break-inside: avoid;
-}
-.skill-bar-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85em;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-.skill-bar-track {
-  height: 6px;
-  background-color: #e2e8f0;
-  border-radius: 3px;
-  overflow: hidden;
-}
-.skill-bar-fill {
-  height: 100%;
-  background-color: var(--cv-primary);
-  border-radius: 3px;
-}
-
-/* 4. نجوم Stars */
-.skills-style-stars .cv-skill-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.2rem 0.5rem;
-  background: rgba(0,0,0,0.03);
-  border-radius: 4px;
-  font-size: 0.88em;
-  break-inside: avoid;
-}
-.skill-stars-text { color: var(--cv-primary); font-size: 0.95em; }
-
-/* 5. نصوص المستويات Levels */
-.skills-style-levels .cv-skill-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  border: 1px solid #cbd5e1;
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
-  font-size: 0.85em;
-  break-inside: avoid;
-}
-.skill-level-badge {
-  font-size: 0.78em;
-  color: var(--cv-primary);
-  font-weight: 700;
-}
-
-/* 6. قائمة بسيطة ATS List */
-.skills-style-list .cv-skills-container {
-  display: block;
-}
-.skills-style-list .cv-skill-list-item {
-  font-size: 0.9em;
-  margin-bottom: 0.25rem;
-  line-height: 1.4;
-}
-
-/* اللغات */
-.cv-languages-grid {
+/* Languages List */
+.cv-languages-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.65rem;
 }
+
 .cv-lang-item {
   display: flex;
-  flex-direction: column;
-  break-inside: avoid;
-}
-.cv-lang-name { font-weight: 700; font-size: 0.92em; }
-.cv-lang-level { font-size: 0.8em; color: var(--cv-text-muted); }
-
-/* --------------------------------------------------------------------------
-   14. أنماط القوالب الـ 15 المتمايزة (15 Distinct Template Styles)
-   -------------------------------------------------------------------------- */
-
-/* TPL 01: Professional (الرسمي الاحترافي) */
-.cv-document.tpl-professional {
-  padding: 20mm 18mm;
-}
-.tpl-professional .cv-header {
-  border-bottom: 2.5px solid var(--cv-primary);
-  padding-bottom: 1.25rem;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-}
-.tpl-professional .cv-name {
-  font-size: 2em;
-  font-weight: 800;
-  color: var(--cv-primary);
-}
-.tpl-professional .cv-title {
-  font-size: 1.15em;
-  font-weight: 600;
-  color: var(--cv-text-muted);
-  margin-top: 0.2rem;
-  margin-bottom: 0.65rem;
-}
-.tpl-professional .cv-contacts-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 1.25rem;
-}
-.tpl-professional .cv-section-title {
-  border-bottom: 1.5px solid var(--cv-primary);
-  padding-bottom: 0.3rem;
-}
-.tpl-professional .cv-photo-wrapper { width: 95px; height: 95px; }
-
-/* TPL 02: Modern (العصري بشريط جانبي) */
-.cv-document.tpl-modern {
-  padding: 0;
-  display: grid;
-  grid-template-columns: 68mm 1fr;
-  min-height: 297mm;
-}
-.tpl-modern .cv-sidebar {
-  background-color: #f8fafc;
-  border-inline-end: 2px solid #e2e8f0;
-  padding: 20mm 14mm;
-  display: flex;
-  flex-direction: column;
-  gap: var(--cv-section-gap);
-}
-.tpl-modern .cv-sidebar .cv-photo-wrapper { width: 100px; height: 100px; margin: 0 auto 0.5rem; }
-.tpl-modern .cv-main-content {
-  padding: 20mm 18mm;
-  display: flex;
-  flex-direction: column;
-  gap: var(--cv-section-gap);
-}
-.tpl-modern .cv-name { font-size: 2.1em; font-weight: 800; color: var(--cv-primary); }
-.tpl-modern .cv-title { font-size: 1.15em; color: var(--cv-text-muted); font-weight: 600; }
-.tpl-modern .cv-sidebar .cv-contacts-wrap { display: flex; flex-direction: column; gap: 0.6rem; }
-.tpl-modern .cv-sidebar .cv-section-title { font-size: 1.05em; border-bottom: 1.5px solid var(--cv-primary); padding-bottom: 0.25rem; }
-
-/* TPL 03: Minimal (بسيط ومريح للعين) */
-.cv-document.tpl-minimal {
-  padding: 22mm 20mm;
-}
-.tpl-minimal .cv-header {
-  text-align: center;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-.tpl-minimal .cv-photo-wrapper { width: 85px; height: 85px; margin: 0 auto 0.75rem; }
-.tpl-minimal .cv-name { font-size: 2.2em; font-weight: 700; letter-spacing: -0.5px; }
-.tpl-minimal .cv-title { font-size: 1.1em; color: var(--cv-primary); font-weight: 500; }
-.tpl-minimal .cv-contacts-wrap { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin-top: 0.75rem; }
-.tpl-minimal .cv-section-title { font-size: 1.05em; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #cbd5e1; padding-bottom: 0.25rem; }
-
-/* TPL 04: Executive (إداري تنفيذي فاخر) */
-.cv-document.tpl-executive {
-  padding: 0;
-}
-.tpl-executive .cv-top-banner {
-  background-color: var(--cv-primary);
-  color: #ffffff;
-  padding: 20mm 18mm 14mm;
-  display: flex;
   align-items: center;
+  font-size: 0.84rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px dashed var(--slate-200);
+}
+
+.cv-lang-level {
+  color: var(--slate-500);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   TEMPLATE 1: MODERN TECH
+   ========================================================================== */
+.template-modern .cv-header {
+  display: flex;
   justify-content: space-between;
-  gap: 1.5rem;
-}
-.tpl-executive .cv-top-banner .cv-name { font-size: 2.3em; font-weight: 800; color: #ffffff; }
-.tpl-executive .cv-top-banner .cv-title { font-size: 1.15em; opacity: 0.9; color: #f1f5f9; }
-.tpl-executive .cv-top-banner .cv-contact-item { color: #f8fafc; }
-.tpl-executive .cv-top-banner .cv-contact-item svg { color: var(--cv-secondary, #38bdf8); }
-.tpl-executive .cv-top-banner .cv-photo-wrapper { border-color: #ffffff; width: 95px; height: 95px; }
-.tpl-executive .cv-body-content { padding: 16mm 18mm 20mm; }
-.tpl-executive .cv-section-title {
-  background-color: rgba(30, 58, 138, 0.08);
-  padding: 0.35rem 0.65rem;
-  border-inline-start: 4px solid var(--cv-primary);
-  border-radius: 2px;
-}
-
-/* TPL 05: Creative (إبداعي ملون) */
-.cv-document.tpl-creative {
-  padding: 20mm 18mm;
-  border-top: 8px solid var(--cv-primary);
-}
-.tpl-creative .cv-header {
-  display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  border-bottom: 2.5px solid var(--primary);
+  padding-bottom: 1.1rem;
 }
-.tpl-creative .cv-name {
-  font-size: 2.4em;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--cv-primary), var(--cv-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.tpl-creative .cv-section-title {
-  color: var(--cv-secondary);
-  border-bottom: 2px dashed var(--cv-secondary);
-  padding-bottom: 0.3rem;
-}
-.tpl-creative .cv-photo-wrapper { width: 95px; height: 95px; border-width: 3px; border-color: var(--cv-secondary); }
 
-/* TPL 06: Elegant (أنيق ونخبوي) */
-.cv-document.tpl-elegant {
-  padding: 22mm 20mm;
+.template-modern .cv-header-photo {
+  width: 92px;
+  height: 92px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  border: 3.5px solid var(--primary);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
-.tpl-elegant .cv-header {
-  border-bottom: 1px double #94a3b8;
-  padding-bottom: 1.25rem;
-  text-align: center;
-}
-.tpl-elegant .cv-name { font-size: 2.1em; font-weight: 700; letter-spacing: 1px; color: var(--cv-primary); }
-.tpl-elegant .cv-title { font-size: 1.05em; letter-spacing: 0.5px; font-style: italic; color: #475569; }
-.tpl-elegant .cv-contacts-wrap { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 0.65rem; }
-.tpl-elegant .cv-section-title {
-  text-align: center;
-  justify-content: center;
+
+.template-modern .cv-section-title {
+  border-bottom: 1.5px solid var(--slate-200);
+  padding-bottom: 0.35rem;
   position: relative;
 }
-.tpl-elegant .cv-section-title::after {
+
+.template-modern .cv-section-title::after {
   content: "";
   display: block;
-  width: 40px;
-  height: 2px;
-  background-color: var(--cv-primary);
-  margin: 4px auto 0;
+  width: 45px;
+  height: 2.5px;
+  background-color: var(--primary);
+  position: absolute;
+  bottom: -1.5px;
+  inset-inline-start: 0;
 }
 
-/* TPL 07: Corporate (مؤسسي شبكي) */
-.cv-document.tpl-corporate {
-  padding: 20mm 18mm;
-}
-.tpl-corporate .cv-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 1.5rem;
-  align-items: center;
-  background-color: #f8fafc;
-  padding: 1.25rem;
-  border-radius: var(--radius-sm);
-  border-inline-start: 6px solid var(--cv-primary);
-  margin-bottom: 1.5rem;
-}
-.tpl-corporate .cv-name { font-size: 2em; font-weight: 800; color: #0f172a; }
-.tpl-corporate .cv-title { font-size: 1.1em; color: var(--cv-primary); font-weight: 600; }
-.tpl-corporate .cv-section-title {
-  background-color: var(--cv-primary);
-  color: #ffffff;
-  padding: 0.3rem 0.65rem;
-  border-radius: 3px;
-}
-
-/* TPL 08: ATS (متوافق 100% مع أنظمة الفرز الآلي ATS) */
-.cv-document.tpl-ats {
-  padding: 18mm 18mm;
-  font-family: 'Inter', 'Roboto', 'Cairo', Arial, sans-serif !important;
-  color: #000000 !important;
-}
-.tpl-ats .cv-header {
-  border-bottom: 1px solid #000000;
-  padding-bottom: 0.75rem;
-  margin-bottom: 1rem;
-}
-.tpl-ats .cv-name { font-size: 1.8em; font-weight: 700; color: #000000; }
-.tpl-ats .cv-title { font-size: 1.05em; font-weight: 600; color: #333333; }
-.tpl-ats .cv-contacts-wrap { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin-top: 0.4rem; }
-.tpl-ats .cv-contact-item { color: #000000; }
-.tpl-ats .cv-contact-item svg { display: none; } /* إخفاء الأيقونات في ATS لتجنب مشاكل القراءة */
-.tpl-ats .cv-section-title {
-  color: #000000;
-  border-bottom: 1px solid #000000;
-  padding-bottom: 2px;
-  font-size: 1.1em;
-  text-transform: uppercase;
-}
-.tpl-ats .cv-section-title svg { display: none; }
-.tpl-ats .cv-photo-wrapper { display: none !important; } /* في قوالب ATS يفضل عدم إدراج الصور */
-
-/* TPL 09: Designer (بصري بمساحات تباين) */
-.cv-document.tpl-designer {
+/* ==========================================================================
+   TEMPLATE 2: EXECUTIVE PRO (Dual Column Layout)
+   ========================================================================== */
+.template-executive {
   padding: 0;
   display: grid;
-  grid-template-columns: 75mm 1fr;
+  grid-template-columns: 70mm 1fr;
   min-height: 297mm;
 }
-.tpl-designer .cv-sidebar {
-  background-color: #0f172a;
-  color: #f8fafc;
-  padding: 22mm 15mm;
+
+.template-executive .exec-sidebar {
+  background-color: var(--slate-900);
+  color: var(--slate-100);
+  padding: 20mm 12mm;
   display: flex;
   flex-direction: column;
-  gap: var(--cv-section-gap);
+  gap: 1.35rem;
 }
-.tpl-designer .cv-sidebar .cv-section-title { color: #38bdf8; border-bottom: 1px solid #334155; }
-.tpl-designer .cv-sidebar .cv-contact-item { color: #cbd5e1; }
-.tpl-designer .cv-sidebar .cv-contact-item svg { color: #38bdf8; }
-.tpl-designer .cv-main-content {
-  padding: 22mm 18mm;
-  display: flex;
+
+.template-executive .exec-sidebar .cv-section-title {
+  color: #38bdf8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.95rem;
+}
+
+.template-executive .exec-sidebar .cv-contact-bar {
   flex-direction: column;
-  gap: var(--cv-section-gap);
-}
-.tpl-designer .cv-name { font-size: 2.2em; font-weight: 800; color: var(--cv-primary); }
-
-/* TPL 10: Tech (تقني للمطورين) */
-.cv-document.tpl-tech {
-  padding: 20mm 18mm;
-  border-inline-start: 4px solid var(--cv-primary);
-}
-.tpl-tech .cv-header {
-  background-color: #f1f5f9;
-  padding: 1.25rem;
-  border-radius: var(--radius-sm);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.tpl-tech .cv-name { font-size: 2em; font-weight: 800; color: var(--cv-primary); font-family: monospace, inherit; }
-.tpl-tech .cv-section-title {
-  font-family: monospace, inherit;
-  color: var(--cv-primary);
-  border-bottom: 1px solid var(--cv-primary);
+  color: var(--slate-300);
+  gap: 0.65rem;
 }
 
-/* TPL 11: Academic (أكاديمي رصين) */
-.cv-document.tpl-academic {
-  padding: 22mm 20mm;
-}
-.tpl-academic .cv-header {
-  text-align: center;
-  border-bottom: 2px solid #334155;
-  padding-bottom: 1rem;
-}
-.tpl-academic .cv-name { font-size: 2em; font-weight: 700; color: #0f172a; }
-.tpl-academic .cv-title { font-size: 1.1em; color: #475569; }
-.tpl-academic .cv-contacts-wrap { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 0.5rem; }
-.tpl-academic .cv-section-title {
-  color: #0f172a;
-  border-bottom: 1px solid #94a3b8;
-  font-size: 1.1em;
-}
-
-/* TPL 12: Classic (كلاسيكي ناعم) */
-.cv-document.tpl-classic {
-  padding: 22mm 20mm;
-}
-.tpl-classic .cv-header {
-  border-bottom: 1px solid var(--cv-primary);
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
-}
-.tpl-classic .cv-name { font-size: 2.1em; font-weight: 700; color: var(--cv-primary); }
-.tpl-classic .cv-section-title {
-  color: var(--cv-primary);
-  border-bottom: 1px solid #cbd5e1;
-}
-
-/* TPL 13: Modern Two Column (عمودين متوازنين) */
-.cv-document.tpl-twocolumn {
-  padding: 18mm 16mm;
-}
-.tpl-twocolumn .cv-header {
-  border-bottom: 2px solid var(--cv-primary);
-  padding-bottom: 1rem;
-}
-.tpl-twocolumn .cv-columns-container {
-  display: grid;
-  grid-template-columns: 55% 42%;
-  gap: 3%;
-  align-items: start;
-}
-
-/* TPL 14: Clean (نظيف خفيف) */
-.cv-document.tpl-clean {
-  padding: 20mm 18mm;
-}
-.tpl-clean .cv-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 1.25rem;
-}
-.tpl-clean .cv-name { font-size: 2em; font-weight: 700; color: #0f172a; }
-.tpl-clean .cv-section-title { color: var(--cv-primary); border-inline-start: 3px solid var(--cv-primary); padding-inline-start: 0.5rem; }
-
-/* TPL 15: Premium (فاخر ذهبي / ملكي) */
-.cv-document.tpl-premium {
-  padding: 22mm 20mm;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  position: relative;
-}
-.tpl-premium::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, var(--cv-primary), var(--cv-secondary), var(--cv-primary));
-}
-.tpl-premium .cv-header {
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.tpl-premium .cv-name { font-size: 2.2em; font-weight: 800; color: var(--cv-primary); }
-.tpl-premium .cv-title { font-size: 1.15em; font-weight: 600; color: var(--cv-secondary); }
-.tpl-premium .cv-section-title {
-  color: var(--cv-primary);
-  border-bottom: 2px solid var(--cv-secondary);
-  padding-bottom: 0.25rem;
-}
-
-/* --------------------------------------------------------------------------
-   15. تذييل الصفحة (Footer)
-   -------------------------------------------------------------------------- */
-.app-footer {
-  background-color: var(--bg-surface);
-  border-top: 1px solid var(--border-light);
-  padding: 2rem 1.5rem;
-  margin-top: auto;
-}
-
-.footer-container {
-  max-width: 1400px;
+.template-executive .exec-sidebar .cv-header-photo {
+  width: 95px;
+  height: 95px;
+  border-radius: var(--radius-pill);
   margin: 0 auto;
+  border: 3.5px solid #38bdf8;
+  display: block;
+}
+
+.template-executive .exec-sidebar .cv-skill-badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--slate-100);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.template-executive .exec-sidebar .cv-lang-item {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.template-executive .exec-sidebar .cv-lang-level {
+  color: #38bdf8;
+}
+
+.template-executive .exec-main {
+  padding: 20mm 15mm;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.85rem;
+  gap: 1.15rem;
 }
 
-.footer-branding {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  justify-content: center;
+.template-executive .exec-main .cv-name {
+  font-size: 2.2rem;
+  color: var(--primary);
 }
 
-.footer-brand-title {
-  font-weight: 800;
+/* ==========================================================================
+   TEMPLATE 3: MINIMAL SWISS (Ultra Clean Whitespace)
+   ========================================================================== */
+.template-minimal {
+  padding: 22mm 20mm;
+}
+
+.template-minimal .cv-header {
+  margin-bottom: 1.75rem;
+}
+
+.template-minimal .cv-name {
+  font-size: 2.3rem;
+  font-weight: 300;
+  color: var(--slate-900);
+  letter-spacing: -0.5px;
+}
+
+.template-minimal .cv-job-title {
+  color: var(--primary);
+  font-weight: 600;
   font-size: 1.1rem;
 }
 
-.footer-tagline {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.template-minimal .cv-section-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--slate-400);
+  border-bottom: 1px solid var(--slate-100);
+  padding-bottom: 0.3rem;
 }
 
-.footer-note {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  max-width: 650px;
+.template-minimal .cv-skill-badge {
+  background: transparent;
+  border: 1px solid var(--slate-300);
+  border-radius: var(--radius-pill);
 }
 
-.footer-links {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
+/* ==========================================================================
+   TEMPLATE 4: ACADEMIC CLASSIC (Harvard Formal Serif)
+   ========================================================================== */
+.template-classic {
+  font-family: 'Merriweather', Times, serif;
 }
 
-.link-btn {
+.template-classic .cv-header {
+  text-align: center;
+  border-bottom: 1.5px solid var(--slate-900);
+  padding-bottom: 1rem;
+  margin-bottom: 1.3rem;
+}
+
+.template-classic .cv-header-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-pill);
+  margin: 0 auto 0.6rem;
+  display: block;
+}
+
+.template-classic .cv-name {
+  font-size: 2.2rem;
+  color: var(--slate-900);
+  letter-spacing: 0.8px;
+}
+
+.template-classic .cv-job-title {
+  font-style: italic;
+  color: var(--slate-700);
+}
+
+.template-classic .cv-contact-bar {
+  justify-content: center;
+  color: var(--slate-700);
+}
+
+.template-classic .cv-section-title {
+  color: var(--slate-900);
+  border-bottom: 1px solid var(--slate-800);
+  padding-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.template-classic .cv-skill-badge {
   background: none;
   border: none;
-  color: var(--color-danger);
-  cursor: pointer;
-  font-weight: 600;
+  padding: 0;
+  font-weight: 500;
 }
 
-.link-btn:hover {
-  text-decoration: underline;
+.template-classic .cv-skill-badge::after {
+  content: " • ";
+  margin: 0 0.35rem;
 }
 
-/* --------------------------------------------------------------------------
-   16. النوافذ المنبثقة والتنبيهات (Modals & Toast System)
-   -------------------------------------------------------------------------- */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
+.template-classic .cv-skill-badge:last-child::after {
+  content: "";
+}
+
+/* ==========================================================================
+   TEMPLATE 5: CREATIVE STUDIO (Vibrant Accent Gradient Banner)
+   ========================================================================== */
+.template-creative {
+  padding: 0;
+}
+
+.template-creative .creative-banner {
+  background: linear-gradient(135deg, var(--primary), var(--slate-900));
+  color: var(--white);
+  padding: 16mm 18mm 12mm;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-}
-
-.modal-overlay[hidden] {
-  display: none;
-}
-
-.modal-box {
-  background-color: #ffffff;
-  border-radius: var(--radius-lg);
-  max-width: 480px;
-  width: 100%;
-  padding: 1.75rem;
-  box-shadow: var(--shadow-lg);
-  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  text-align: center;
-}
-
-.modal-box.modal-lg {
-  max-width: 620px;
-  text-align: inherit;
-}
-
-@keyframes modalPop {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.modal-icon {
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.modal-title {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--text-main);
-}
-
-.modal-close-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--text-muted);
-  cursor: pointer;
-  line-height: 1;
-}
-
-.modal-desc {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.modal-actions {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
 }
 
-.guide-steps {
+.template-creative .creative-banner .cv-name {
+  color: var(--white);
+}
+
+.template-creative .creative-banner .cv-job-title {
+  color: #38bdf8;
+}
+
+.template-creative .creative-banner .cv-contact-bar {
+  color: var(--slate-200);
+}
+
+.template-creative .creative-banner .cv-header-photo {
+  width: 95px;
+  height: 95px;
+  border-radius: var(--radius-pill);
+  border: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.template-creative .creative-body {
+  padding: 14mm 18mm;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.15rem;
 }
 
-.guide-step {
-  display: flex;
-  gap: 0.85rem;
-  align-items: flex-start;
-}
-
-.step-num {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background-color: var(--color-primary-app);
-  color: #ffffff;
+.template-creative .cv-skill-badge {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-color: var(--primary-border);
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 0.9rem;
 }
 
-.step-text strong {
-  font-size: 0.95rem;
-  color: var(--text-main);
-}
-
-.step-text p {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-top: 0.2rem;
-}
-
-/* Toast */
-.toast-container {
-  position: fixed;
-  bottom: 24px;
-  inset-inline-start: 24px;
-  z-index: 1100;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  pointer-events: none;
-}
-
-.toast {
-  pointer-events: auto;
-  background-color: #1e293b;
-  color: #ffffff;
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  font-size: 0.9rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  animation: toastIn 0.3s ease-out;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.toast.toast-success {
-  border-inline-start: 4px solid var(--color-success);
-}
-
-.toast.toast-danger {
-  border-inline-start: 4px solid var(--color-danger);
-}
-
-@keyframes toastIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* --------------------------------------------------------------------------
-   17. التجاوب مع مختلف الشاشات (Responsive Queries)
-   -------------------------------------------------------------------------- */
-@media (max-width: 1200px) {
-  .builder-container {
-    grid-template-columns: minmax(420px, 480px) 1fr;
-    gap: 1.25rem;
-    padding: 1rem;
-  }
-}
-
-@media (max-width: 992px) {
-  .mobile-tabs-bar {
-    display: flex;
-  }
-  
-  .builder-container {
-    display: block;
-    padding: 1rem;
-  }
-
-  .editor-panel.mobile-hidden,
-  .preview-panel.mobile-hidden {
-    display: none !important;
-  }
-
-  .preview-panel {
-    position: static;
-    max-height: none;
-  }
-  
-  .header-nav {
-    display: none;
-  }
-
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .advanced-color-pickers {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .form-row-2 {
-    grid-template-columns: 1fr;
-  }
-
-  .compact-repeater-row {
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
-  }
-
-  .header-actions .btn-text {
-    display: none;
-  }
-  
-  .hero-section {
-    padding: 2rem 1rem 1.5rem;
-  }
-
-  .advanced-color-pickers {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   18. قواعد الطباعة المتقدمة الاحترافية A4 (Strict Non-Clipping Print CSS)
-   -------------------------------------------------------------------------- */
-@page {
-  size: A4 portrait;
-  margin: 10mm 12mm 10mm 12mm;
-}
-
+/* ==========================================================================
+   Flawless Print & PDF Export Rules (A4 Exact)
+   ========================================================================== */
 @media print {
-  /* إخفاء كافة عناصر التحكم وواجهات الموقع */
-  .no-print,
-  .app-header,
-  .hero-section,
-  .mobile-tabs-bar,
-  .editor-panel,
-  .preview-toolbar,
-  .print-tip-bar,
-  .app-footer,
-  .modal-overlay,
-  .toast-container,
-  .btn-toggle-guides {
-    display: none !important;
+  @page {
+    size: A4 portrait;
+    margin: 0;
   }
 
-  /* إزالة أي خلفيات أو هوامش تعيق الطباعة في المستند */
   html, body {
-    background-color: #ffffff !important;
+    width: 210mm;
+    height: auto;
     background: #ffffff !important;
-    color: #000000 !important;
     margin: 0 !important;
     padding: 0 !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-  }
-
-  .builder-container {
-    display: block !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    max-width: none !important;
-    width: 100% !important;
-  }
-
-  .preview-panel {
-    display: block !important;
-    position: static !important;
-    max-height: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-
-  .cv-viewport-wrapper {
-    background: transparent !important;
-    padding: 0 !important;
-    overflow: visible !important;
-    box-shadow: none !important;
-    display: block !important;
-    min-height: 0 !important;
-  }
-
-  .cv-paper-container {
-    transform: none !important;
-    display: block !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* ورقة السيرة الذاتية أثناء الطباعة: تتمدد لصفحات متعددة A4 بدون قطع */
-  .cv-document {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 0 !important;
-    height: auto !important;
-    box-shadow: none !important;
-    border: none !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-    background-image: none !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    color-adjust: exact !important;
   }
 
-  /* منع تقسيم العناصر الفردية بشكل عشوائي بين الصفحات */
-  .cv-block-item,
-  .cv-skill-item,
-  .cv-skill-tag,
-  .cv-lang-item,
-  .cv-photo-wrapper,
-  .cv-header,
-  .cv-contact-item {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
+  .app-header,
+  .editor-panel,
+  .preview-floating-toolbar {
+    display: none !important;
   }
 
-  /* منع ظهور عناوين الأقسام منفردة في أسفل الصفحة */
-  .cv-section-title {
-    break-after: avoid !important;
-    page-break-after: avoid !important;
-    break-inside: avoid !important;
+  .app-layout {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
   }
 
-  /* السماح للأقسام الكبيرة بالانتقال للصفحة التالية بانسيابية */
-  .cv-section {
-    break-inside: auto !important;
-    page-break-inside: auto !important;
+  .preview-panel {
+    background: transparent !important;
+    background-image: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    width: 210mm !important;
+  }
+
+  .preview-canvas-wrapper {
+    transform: none !important;
+    width: 210mm !important;
+  }
+
+  .cv-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+
+  .editor-panel {
+    border-left: none;
+    border-bottom: 1px solid var(--slate-200);
+    max-height: none;
+  }
+
+  .preview-panel {
+    min-height: 100vh;
+  }
+
+  .preview-canvas-wrapper {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .theme-settings-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-canvas-wrapper {
+    transform: scale(0.48);
   }
 }
